@@ -1,0 +1,430 @@
+:root {
+    --primary-color: #4a90e2; /* Blue */
+    --secondary-color: #f5a623; /* Orange */
+    --danger-color: #d0021b; /* Red */
+    --success-color: #7ed321; /* Green */
+    --light-bg: #f8f9fa;
+    --dark-text: #343a40;
+    --medium-text: #6c757d;
+    --light-text: #f8f9fa;
+    --border-color: #dee2e6;
+    --card-bg: #ffffff;
+    --occupied-small-bg: #fadcde; /* Light pinkish red */
+    --occupied-large-bg: #fce4cf; /* Light orangish */
+    --free-small-bg: #d4e9fc; /* Light blue */
+    --free-large-bg: #d9f7d3; /* Light green */
+    --occupied-small-border: #f0a0a5;
+    --occupied-large-border: #f8c8a0;
+    --free-small-border: #a8d3f7;
+    --free-large-border: #b4eeb4;
+    --font-family: 'Poppins', sans-serif;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--light-bg);
+    color: var(--dark-text);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+
+.main-header {
+    background-color: var(--primary-color);
+    color: var(--light-text);
+    padding: 20px 0;
+    text-align: center;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow-sm);
+}
+
+.main-header h1 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 2.5em;
+}
+
+.main-header p {
+    margin: 5px 0 0;
+    font-weight: 300;
+    opacity: 0.9;
+}
+
+h1, h2, h3, h4 {
+    color: var(--dark-text);
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 1.5em;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 1.25em;
+    color: var(--primary-color);
+}
+h4 {
+    font-size: 1.1em;
+    color: var(--secondary-color);
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px;
+    max-width: 1400px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.card {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-color);
+}
+
+.parking-lot-container {
+    /* Takes up available space */
+}
+
+.controls-dashboard-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.parking-lot {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Responsive columns */
+    gap: 15px;
+    padding: 15px;
+    background-color: #f1f3f5; /* Slightly different bg */
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    min-height: 250px; /* Ensure minimum height */
+}
+
+.slot {
+    border: 2px solid var(--border-color);
+    min-height: 80px; /* Increased height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    font-size: 0.85em; /* Adjusted font size */
+    padding: 10px;
+    text-align: center;
+    box-sizing: border-box;
+    background-color: var(--card-bg); /* Default background */
+    box-shadow: var(--shadow-sm);
+}
+
+.slot .slot-id {
+    font-weight: 600;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+    color: var(--dark-text);
+}
+.slot .slot-type {
+    font-size: 0.8em;
+    color: var(--medium-text);
+    margin-bottom: 5px;
+}
+.slot .vehicle-info {
+    font-size: 0.8em;
+    font-weight: 600;
+    color: var(--dark-text);
+    margin-top: 5px;
+}
+.slot .entry-time {
+    font-size: 0.75em;
+    color: var(--medium-text);
+    margin-top: 3px;
+}
+
+/* Free Slot Styling */
+.slot.free.small {
+    background-color: var(--free-small-bg);
+    border-color: var(--free-small-border);
+}
+.slot.free.large {
+    background-color: var(--free-large-bg);
+    border-color: var(--free-large-border);
+}
+
+/* Occupied Slot Styling */
+.slot.occupied {
+    cursor: pointer; /* Still clickable to exit */
+}
+.slot.occupied.small {
+     background-color: var(--occupied-small-bg);
+     border-color: var(--occupied-small-border);
+}
+.slot.occupied.large {
+     background-color: var(--occupied-large-bg);
+     border-color: var(--occupied-large-border);
+}
+
+.slot:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.slot.selected {
+    outline: 3px solid var(--primary-color); /* Blue outline for selected */
+    transform: scale(1.03);
+    box-shadow: 0 6px 12px rgba(74, 144, 226, 0.3);
+}
+
+.legend {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+    display: flex;
+    gap: 10px 20px; /* Row gap, column gap */
+    align-items: center;
+    flex-wrap: wrap;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--medium-text);
+}
+.legend-item .slot-indicator {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 2px solid;
+    vertical-align: middle;
+}
+/* Apply slot colors to legend indicators */
+.legend .slot-indicator.small.free { background-color: var(--free-small-bg); border-color: var(--free-small-border); }
+.legend .slot-indicator.large.free { background-color: var(--free-large-bg); border-color: var(--free-large-border); }
+.legend .slot-indicator.occupied.small { background-color: var(--occupied-small-bg); border-color: var(--occupied-small-border); }
+.legend .slot-indicator.occupied.large { background-color: var(--occupied-large-bg); border-color: var(--occupied-large-border); }
+
+.controls {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color);
+}
+
+.controls h3 .slot-highlight {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.controls label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 0.9em;
+    color: var(--medium-text);
+}
+.controls select {
+    display: block;
+    margin-bottom: 15px;
+    width: 100%; /* Full width */
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: #fff;
+    font-size: 1em;
+    box-sizing: border-box;
+    appearance: none; /* Remove default arrow */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%236c757d'%3E%3Cpath fill-rule='evenodd' d='M8 11.293l-4.646-4.647a.5.5 0 0 1 .708-.708L8 9.879l4.938-4.937a.5.5 0 0 1 .708.708L8 11.293z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+}
+.controls select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap; /* Allow buttons to wrap */
+}
+
+.btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-size: 0.95em;
+    font-weight: 600;
+    flex-grow: 1; /* Allow buttons to grow */
+    text-align: center;
+}
+.btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+.btn:active {
+    transform: translateY(0px);
+    opacity: 1;
+}
+
+.btn-primary { background-color: var(--primary-color); color: white; }
+.btn-secondary { background-color: var(--medium-text); color: white; }
+.btn-danger { background-color: var(--danger-color); color: white; }
+.btn-warning { background-color: var(--secondary-color); color: white; }
+.btn-success { background-color: var(--success-color); color: white; } /* Added success style if needed */
+
+/* Specific button overrides */
+#cancel-booking-button, #cancel-exit-button { background-color: var(--medium-text); }
+#cancel-booking-button:hover, #cancel-exit-button:hover { background-color: #5a6268; }
+
+#exit-button { background-color: var(--secondary-color); }
+#exit-button:hover { background-color: #e9940f; }
+
+#confirm-exit-button { background-color: var(--danger-color); }
+#confirm-exit-button:hover { background-color: #b80218; }
+
+.message-area {
+    padding: 15px;
+    background-color: var(--free-small-bg); /* Light info blue */
+    border: 1px solid var(--free-small-border);
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
+    text-align: center;
+    color: #0c5460; /* Darker blue text */
+    font-weight: 500;
+}
+
+.slot-info {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f1f3f5;
+    border-radius: var(--border-radius);
+    font-size: 0.9em;
+}
+.slot-info p {
+    margin: 5px 0;
+}
+.slot-info strong {
+    color: var(--dark-text);
+}
+
+.charge-info {
+    margin-top: 20px;
+    margin-bottom: 15px; /* Add margin below */
+    padding: 15px;
+    background-color: var(--occupied-large-bg); /* Light warning yellow */
+    border: 1px solid var(--occupied-large-border);
+    border-radius: var(--border-radius);
+    text-align: center;
+}
+.charge-info h4 {
+    color: #856404; /* Darker yellow/brown */
+    margin-bottom: 15px;
+}
+.charge-info #confirm-exit-button {
+    width: auto; /* Don't force full width */
+    display: inline-block;
+    flex-grow: 0; /* Prevent stretching */
+}
+
+.dashboard {
+    /* Styles already applied via .card */
+}
+.dashboard h3 {
+    color: var(--success-color); /* Green for dashboard title */
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+.dashboard .total-collected {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--success-color);
+    text-align: center;
+}
+.dashboard .total-collected span {
+    font-family: monospace; /* Use monospace for numbers */
+}
+
+.hidden {
+    display: none;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 900px) {
+    .container {
+        grid-template-columns: 1fr; /* Stack columns */
+        padding: 15px;
+    }
+    .parking-lot {
+        grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+        gap: 10px;
+    }
+     .slot {
+        min-height: 70px;
+        font-size: 0.8em;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-header h1 {
+        font-size: 2em;
+    }
+    .container {
+        padding: 10px;
+        gap: 20px;
+    }
+    .card {
+        padding: 15px;
+    }
+    h2 {
+        font-size: 1.3em;
+    }
+    .parking-lot {
+        grid-template-columns: repeat(3, 1fr); /* Fixed 3 columns on small screens */
+        gap: 8px;
+    }
+    .slot {
+        min-height: 65px;
+        font-size: 0.75em;
+        padding: 5px;
+    }
+    .btn {
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
+    .button-group {
+        flex-direction: column; /* Stack buttons vertically */
+    }
+    .legend {
+        font-size: 0.8em;
+        gap: 5px 10px;
+    }
+    .legend-item .slot-indicator {
+        width: 15px;
+        height: 15px;
+    }
+}
